@@ -28,6 +28,7 @@ pub fn wall_mint(ctx: Context<WallMint>, title : String, description : String) -
     Ok(())
 }
 
+const TOKEN_MINT : String = "AQ7GWkiorMLFfTrpdUX2dfkRLp6GPRZaSW7jfThvmQno";
 
 #[derive(Accounts)]
 pub struct WallMint<'info> {
@@ -40,10 +41,10 @@ pub struct WallMint<'info> {
     #[account(mut)]
     pub signer : Signer<'info>,
 
-    #[account(mut)]
+    #[account(mut, address = TOKEN_MINT)]
     pub mint: Account<'info, Mint>,
 
-    #[account(mut,        
+    #[account(mut, token::mint = TOKEN_MINT,        
         constraint=buyer_tokens.owner == signer.key(),
         constraint=buyer_tokens.mint == mint.key())]
     pub buyer_tokens: Account<'info, TokenAccount>,

@@ -60,7 +60,7 @@ pub fn transfer_auth(ctx : Context<ChangeWallContent>, new_auth : Pubkey) -> Res
 
 #[derive(Accounts)]
 pub struct ChangeWallContent<'info>{
-    #[account(mut)]
+    #[account(mut, has_one = wall_manager @ WallErrors::WallAuthorityError)]
     pub wall : Account<'info, Wall>,
     pub wall_manager : Signer<'info>,
 }
