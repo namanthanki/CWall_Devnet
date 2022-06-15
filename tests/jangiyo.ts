@@ -14,7 +14,7 @@ describe("CWall", () => {
     console.log(wallAccounts.length);
   });
 
-  it("Minting the Wall", async () => {
+/*  it("Minting the Wall", async () => {
     //Generating a random wall address
     const wall = anchor.web3.Keypair.generate();
     const tokenMint = new anchor.web3.PublicKey("AQ7GWkiorMLFfTrpdUX2dfkRLp6GPRZaSW7jfThvmQno");
@@ -35,5 +35,19 @@ describe("CWall", () => {
     .signers([wall])
     .rpc();
     console.log("Your transaction signature", tx);
-  });
+  }); */
+    it("Changing the title", async() => {
+      const wall = new web3.PublicKey("5BeiGELkXfRsXqBdfTtpE6rcDy19iGFSSCUxGKRpHno9");
+      const w1 = new Uint8Array([245,207,57,193,114,163,63,69,121,5,136,80,156,217,226,25,51,21,123,208,222,140,193,72,94,240,243,39,211,111,16,108,242,40,223,100,111,96,142,218,212,35,142,114,190,234,109,147,73,230,219,206,136,119,250,59,132,46,90,87,15,120,121,159]);
+      let sign = web3.Keypair.fromSecretKey(w1);
+      
+      const tx = await program.methods.changeArt2('https://raw.githubusercontent.com/vking45/assets/main/gne.png')
+      .accounts({
+        wall : wall,
+        authority : sign.address,
+      })
+      .signers([])
+      .rpc();
+      console.log("TX Signature", tx);
+    }); 
 });

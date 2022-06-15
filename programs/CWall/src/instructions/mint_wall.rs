@@ -2,6 +2,9 @@ use anchor_lang::prelude::*;
 use crate::state::wall::*;
 use anchor_spl::token::{TokenAccount, Burn, Mint, Token};
 use anchor_spl::token::burn;
+use solana_program::pubkey::Pubkey;
+
+pub const TOKEN_MINT : Pubkey = solana_program::pubkey!("AQ7GWkiorMLFfTrpdUX2dfkRLp6GPRZaSW7jfThvmQno");
 
 
 pub fn wall_mint(ctx: Context<WallMint>, title : String, description : String) -> Result<()> {
@@ -27,8 +30,6 @@ pub fn wall_mint(ctx: Context<WallMint>, title : String, description : String) -
     wall.description = description; 
     Ok(())
 }
-
-const TOKEN_MINT : String = "AQ7GWkiorMLFfTrpdUX2dfkRLp6GPRZaSW7jfThvmQno";
 
 #[derive(Accounts)]
 pub struct WallMint<'info> {

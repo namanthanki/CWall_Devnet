@@ -5,6 +5,14 @@ pub mod errors;
 pub mod instructions;
 pub mod state;
 
+//security_txt! {
+//    name: "Blog Sol",
+//    project_url: "https://kiran-bhalerao.github.io/blog-dapp-solana/",
+//    contacts: "link:https://github.com/kiran-bhalerao/blog-dapp-solana",
+//    policy: "https://github.com/kiran-bhalerao/blog-dapp-solana"
+//}
+
+
 declare_id!("2g4TRtHYKE7JYGAiERpmfs5FFZTaqsrjDDgVRPEpTgg6");
 
 #[program]
