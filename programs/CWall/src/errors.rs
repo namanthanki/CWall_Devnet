@@ -14,5 +14,8 @@ pub enum WallErrors {
 
     #[msg("You don't have the authority to change this wall's content")]
     WallAuthorityError,
+
+    #[msg("Only GNE tokens are accepted for minting the wall!!!")]
+    InvalidTokenError,
     
 }

@@ -3,6 +3,7 @@ use crate::state::wall::*;
 use anchor_spl::token::{TokenAccount, Burn, Mint, Token};
 use anchor_spl::token::burn;
 use solana_program::pubkey::Pubkey;
+use crate::errors::WallErrors;
 
 pub const TOKEN_MINT : Pubkey = solana_program::pubkey!("AQ7GWkiorMLFfTrpdUX2dfkRLp6GPRZaSW7jfThvmQno");
 
@@ -12,6 +13,8 @@ pub fn wall_mint(ctx: Context<WallMint>, title : String, description : String) -
     let signer : &Signer = &ctx.accounts.signer;
     let buyer_tokens = &ctx.accounts.buyer_tokens;
     let token_program = &ctx.accounts.token_program;
+    
+    require_keys_eq!(TOKEN_MINT, ctx.accounts.mint.key(), WallErrors::InvalidTokenError);
 
     burn(
         CpiContext::new(
