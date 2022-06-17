@@ -64,5 +64,20 @@ pub mod CWall {
         Ok(())
     }
 
+    pub fn change_state_landscape(ctx : Context<ChangeWallContent>) -> Result<()> {
+        instructions::wall_fns::change_state_landscape(ctx)?;
+        Ok(())
+    }
+
+    pub fn change_state_portrait(ctx : Context<ChangeWallContent>) -> Result<()> {
+        instructions::wall_fns::change_state_portrait(ctx)?;
+        Ok(())
+    }
+
+    pub fn change_state_square(ctx : Context<ChangeWallContent>) -> Result<()> {
+        instructions::wall_fns::change_state_square(ctx)?;
+        Ok(())
+    }
+ 
 }
 

@@ -58,6 +58,27 @@ pub fn transfer_auth(ctx : Context<ChangeWallContent>, new_auth : Pubkey) -> Res
     Ok(())
 }
 
+pub fn change_state_landscape(ctx: Context<ChangeWallContent>) -> Result<()>{
+    let wall : &mut Account<Wall> = &mut ctx.accounts.wall;
+    require_keys_eq!(wall.get_authority(), ctx.accounts.authority.key(), WallErrors::WallAuthorityError);
+    wall.change_state_landscape()?;
+    Ok(())
+}
+
+pub fn change_state_portrait(ctx: Context<ChangeWallContent>) -> Result<()>{
+    let wall : &mut Account<Wall> = &mut ctx.accounts.wall;
+    require_keys_eq!(wall.get_authority(), ctx.accounts.authority.key(), WallErrors::WallAuthorityError);
+    wall.change_state_portrait()?;
+    Ok(())
+}
+
+pub fn change_state_square(ctx: Context<ChangeWallContent>) -> Result<()>{
+    let wall : &mut Account<Wall> = &mut ctx.accounts.wall;
+    require_keys_eq!(wall.get_authority(), ctx.accounts.authority.key(), WallErrors::WallAuthorityError);
+    wall.change_state_square()?;
+    Ok(())
+}
+
 #[derive(Accounts)]
 pub struct ChangeWallContent<'info>{
     #[account(mut)]

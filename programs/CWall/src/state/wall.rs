@@ -11,6 +11,7 @@ pub struct Wall {
     pub art_3 : String, // 80 chars * 4 = 320
     pub art_4 : String, // 80 chars * 4 = 320
     pub art_5 : String, // 80 chars * 4 = 320
+    pub wall_state : WallState, // (9 * 4) + 1
 }
 
 const DISCRIMINATOR_LENGTH: usize = 8;
@@ -19,13 +20,15 @@ const STRING_LENGTH_PREFIX: usize = 4;
 const MAX_TITLE : usize = 21 * 4;
 const MAX_DESCRIPTION : usize = 100 * 4;
 const MAX_ART : usize = 80 * 4;
+const WALL_STATE : usize = 1 + 36;
 
 impl Wall {
     pub const LEN : usize = DISCRIMINATOR_LENGTH
         + PUBLIC_KEY_LENGTH
         + STRING_LENGTH_PREFIX + MAX_TITLE
         + STRING_LENGTH_PREFIX + MAX_DESCRIPTION
-        + (5 * (STRING_LENGTH_PREFIX + MAX_ART));
+        + (5 * (STRING_LENGTH_PREFIX + MAX_ART))
+        + WALL_STATE;
 
     pub fn get_authority(&self) -> Pubkey {
         self.authority
@@ -84,4 +87,26 @@ impl Wall {
         self.authority = new_auth;
         Ok(())
     }
+
+    pub fn change_state_landscape(&mut self) -> Result<()>{
+        self.wall_state = WallState::Landscape;
+        Ok(())
+    }
+
+    pub fn change_state_portrait(&mut self) -> Result<()>{
+        self.wall_state = WallState::Portrait;
+        Ok(())
+    }
+
+    pub fn change_state_square(&mut self) -> Result<()>{
+        self.wall_state = WallState::Square;
+        Ok(())
+    }
+}
+
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, PartialEq, Eq)]
+pub enum WallState{
+    Landscape,
+    Portrait,
+    Square,
 }
