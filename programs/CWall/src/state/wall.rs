@@ -10,7 +10,6 @@ pub struct Wall {
     pub art_2 : String, // 80 chars * 4 = 320
     pub art_3 : String, // 80 chars * 4 = 320
     pub art_4 : String, // 80 chars * 4 = 320
-    pub art_5 : String, // 80 chars * 4 = 320
     pub wall_state : WallState, // (9 * 4) + 1
 }
 
@@ -27,7 +26,7 @@ impl Wall {
         + PUBLIC_KEY_LENGTH
         + STRING_LENGTH_PREFIX + MAX_TITLE
         + STRING_LENGTH_PREFIX + MAX_DESCRIPTION
-        + (5 * (STRING_LENGTH_PREFIX + MAX_ART))
+        + (4 * (STRING_LENGTH_PREFIX + MAX_ART))
         + WALL_STATE;
 
     pub fn get_authority(&self) -> Pubkey {
@@ -74,13 +73,6 @@ impl Wall {
             return Err(error!(WallErrors::WallArtLinkLengthError));
         }
         self.art_4 = new_art4;
-        Ok(())
-    }
-    pub fn change_art5(&mut self, new_art5 : String) -> Result<()>{
-        if new_art5.len() == 0 as usize || new_art5.len() > 80 as usize {
-            return Err(error!(WallErrors::WallArtLinkLengthError));
-        }
-        self.art_5 = new_art5;
         Ok(())
     }
     pub fn transfer_auth(&mut self, new_auth : Pubkey) -> Result<()>{

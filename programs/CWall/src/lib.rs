@@ -5,12 +5,12 @@ pub mod errors;
 pub mod instructions;
 pub mod state;
 
-//security_txt! {
-//    name: "Blog Sol",
-//    project_url: "https://kiran-bhalerao.github.io/blog-dapp-solana/",
-//    contacts: "link:https://github.com/kiran-bhalerao/blog-dapp-solana",
-//    policy: "https://github.com/kiran-bhalerao/blog-dapp-solana"
-//}
+security_txt! {
+    name: "Creators' Wall",
+    project_url: "https://github.com/vking45/CWall_Devnet",
+    contacts: "mail:cwall@projectgne.com",
+    policy: "https://github.com/vking45/CWall_Devnet",
+}
 
 
 declare_id!("2g4TRtHYKE7JYGAiERpmfs5FFZTaqsrjDDgVRPEpTgg6");
@@ -51,11 +51,6 @@ pub mod CWall {
 
     pub fn change_art4(ctx : Context<ChangeWallContent>, new_art : String) -> Result<()> {
         instructions::wall_fns::change_art4(ctx, new_art)?;
-        Ok(())
-    }
-
-    pub fn change_art5(ctx : Context<ChangeWallContent>, new_art : String) -> Result<()> {
-        instructions::wall_fns::change_art5(ctx, new_art)?;
         Ok(())
     }
 

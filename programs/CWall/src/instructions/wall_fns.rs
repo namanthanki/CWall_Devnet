@@ -44,13 +44,6 @@ pub fn change_art4(ctx : Context<ChangeWallContent>, new_art : String) -> Result
     Ok(())
 }
 
-pub fn change_art5(ctx : Context<ChangeWallContent>, new_art : String) -> Result<()> {
-    let wall : &mut Account<Wall> = &mut ctx.accounts.wall;
-    require_keys_eq!(wall.get_authority(), ctx.accounts.authority.key(), WallErrors::WallAuthorityError);
-    wall.change_art5(new_art)?;
-    Ok(())
-}
-
 pub fn transfer_auth(ctx : Context<ChangeWallContent>, new_auth : Pubkey) -> Result<()> {
     let wall : &mut Account<Wall> = &mut ctx.accounts.wall;
     require_keys_eq!(wall.get_authority(), ctx.accounts.authority.key(), WallErrors::WallAuthorityError);

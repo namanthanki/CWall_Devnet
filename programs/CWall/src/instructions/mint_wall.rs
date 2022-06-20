@@ -25,7 +25,7 @@ pub fn wall_mint(ctx: Context<WallMint>, title : String, description : String) -
                 authority: signer.to_account_info(),
             },
         ),
-        500 * 1000000000,
+        400 * 1000000000,
     )?;
 
     wall.authority = *signer.key;
