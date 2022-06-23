@@ -22,3 +22,6 @@ overflow-checks = true
 anchor-lang = "0.24.2"
 anchor-spl = "0.24.2"
 solana-program = "1.9.18"
+solana-security-txt = "1.0.1"
+
+

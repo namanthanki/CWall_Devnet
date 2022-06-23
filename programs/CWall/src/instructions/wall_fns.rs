@@ -1,6 +1,9 @@
 use crate::errors::WallErrors;
 use anchor_lang::prelude::*;
 use crate::state::wall::*;
+use solana_program::pubkey::Pubkey;
+
+pub const DAO_ADDRESS : Pubkey = solana_program::pubkey!("HJHp2ax4Y6UQ2bn2a4LJqEjmyzqrbLpZvq5GuuZHZwJn");
 
 pub fn change_title(ctx : Context<ChangeWallContent>, new_title : String) -> Result<()> {
     let wall : &mut Account<Wall> = &mut ctx.accounts.wall;
@@ -69,6 +72,20 @@ pub fn change_state_square(ctx: Context<ChangeWallContent>) -> Result<()>{
     let wall : &mut Account<Wall> = &mut ctx.accounts.wall;
     require_keys_eq!(wall.get_authority(), ctx.accounts.authority.key(), WallErrors::WallAuthorityError);
     wall.change_state_square()?;
+    Ok(())
+}
+
+pub fn content_mod_true(ctx: Context<ChangeWallContent>) -> Result<()>{
+    let wall : &mut Account<Wall> = &mut ctx.accounts.wall;
+    require_keys_eq!(wall.get_authority(), DAO_ADDRESS, WallErrors::DAOApprovalError);
+    wall.content_mod_true()?;
+    Ok(())
+}
+
+pub fn content_mod_false(ctx: Context<ChangeWallContent>) -> Result<()>{
+    let wall : &mut Account<Wall> = &mut ctx.accounts.wall;
+    require_keys_eq!(wall.get_authority(), DAO_ADDRESS, WallErrors::DAOApprovalError);
+    wall.content_mod_false()?;
     Ok(())
 }
 

@@ -11,6 +11,7 @@ pub struct Wall {
     pub art_3 : String, // 80 chars * 4 = 320
     pub art_4 : String, // 80 chars * 4 = 320
     pub wall_state : WallState, // (9 * 4) + 1
+    pub content_moderated : bool, // 1
 }
 
 const DISCRIMINATOR_LENGTH: usize = 8;
@@ -20,6 +21,7 @@ const MAX_TITLE : usize = 21 * 4;
 const MAX_DESCRIPTION : usize = 100 * 4;
 const MAX_ART : usize = 80 * 4;
 const WALL_STATE : usize = 1 + 36;
+const BOOL_LENGTH : usize = 1;
 
 impl Wall {
     pub const LEN : usize = DISCRIMINATOR_LENGTH
@@ -27,7 +29,9 @@ impl Wall {
         + STRING_LENGTH_PREFIX + MAX_TITLE
         + STRING_LENGTH_PREFIX + MAX_DESCRIPTION
         + (4 * (STRING_LENGTH_PREFIX + MAX_ART))
-        + WALL_STATE;
+        + WALL_STATE
+        + BOOL_LENGTH
+        ;
 
     pub fn get_authority(&self) -> Pubkey {
         self.authority
@@ -92,6 +96,16 @@ impl Wall {
 
     pub fn change_state_square(&mut self) -> Result<()>{
         self.wall_state = WallState::Square;
+        Ok(())
+    }
+
+    pub fn content_mod_true(&mut self) -> Result<()> {
+        self.content_moderated = true;
+        Ok(())
+    }
+
+    pub fn content_mod_false(&mut self) -> Result<()> {
+        self.content_moderated = false;
         Ok(())
     }
 }

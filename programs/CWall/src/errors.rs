@@ -18,4 +18,6 @@ pub enum WallErrors {
     #[msg("Only GNE tokens are accepted for minting the wall!!!")]
     InvalidTokenError,
     
+    #[msg("Only DAO can approve this function!")]
+    DAOApprovalError,
 }

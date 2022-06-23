@@ -1,15 +1,16 @@
 use anchor_lang::prelude::*;
 use instructions::*;
+use solana_security_txt::security_txt;
 
 pub mod errors;
 pub mod instructions;
 pub mod state;
 
-security_txt! {
+security_txt!{
     name: "Creators' Wall",
     project_url: "https://github.com/vking45/CWall_Devnet",
     contacts: "mail:cwall@projectgne.com",
-    policy: "https://github.com/vking45/CWall_Devnet",
+    policy: "https://github.com/vking45/CWall_Devnet"
 }
 
 
