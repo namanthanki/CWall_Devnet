@@ -1,0 +1,29 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+}
+
+.navbar-logo {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 1%;
+}
+
+.navbar-links {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 1%;
+    /* 
+    experimental style property: 
+        padding: 0.8 rem calc((100vw - 1000px) / 2);
+    */
+}
+
+.navbar-item {
+    text-decoration: none;
+    padding: 0 1rem;
+    height: 100%;
+    cursor: pointer;
+}
